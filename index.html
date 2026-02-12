@@ -457,15 +457,40 @@
   <div class="finalBackdrop" id="finalBackdrop" aria-hidden="true">
     <div class="final" role="dialog" aria-modal="true" aria-labelledby="finalTitle">
       <div class="modalTitle" id="finalTitle">Congratulations. You’re Stuck With Me 💞</div>
+
       <p class="modalText" style="margin-top:6px;">
         By accepting, you've renewed our friendship for another year with access to the membership that offers:
       </p>
 
       <ul class="heartList">
-        <li><span class="heartBullet" aria-hidden="true"></span><span>We celebrate love without the pressure, the drama, or the weird couples photoshoot <em>(maybe you'll still have to do a few photoshoots, but they'll be iconic)</em></span></li>
-        <li><span class="heartBullet" aria-hidden="true"></span><span>You receive unlimited (reasonable) emotional support, memes, and hype.</span></li>
-        <li><span class="heartBullet" aria-hidden="true"></span><span>The best service any boyfriend could ever offer you.</span></li>
-        <li><span class="heartBullet" aria-hidden="true"></span><span>Bonus: snacks. Always snacks.</span></li>
+        <li>
+          <span class="heartBullet" aria-hidden="true"></span>
+          <span>
+            We celebrate love without the pressure, the drama (only other people's), or the weird couples' photoshoot
+            <em>(maybe you'll still have to do a few photoshoots, but they'll be iconic)</em>
+          </span>
+        </li>
+
+        <li>
+          <span class="heartBullet" aria-hidden="true"></span>
+          <span>
+            You receive unlimited (reasonable) emotional and delululuuuu support, memes, and hype.
+          </span>
+        </li>
+
+        <li>
+          <span class="heartBullet" aria-hidden="true"></span>
+          <span>
+            The best service any boyfriend could ever offer you.
+          </span>
+        </li>
+
+        <li>
+          <span class="heartBullet" aria-hidden="true"></span>
+          <span>
+            Bonus: food. Always fantastic food.
+          </span>
+        </li>
       </ul>
     </div>
   </div>
@@ -484,7 +509,7 @@
     try{ navigator.vibrate?.(30); }catch(e){}
   });
 
-  const durationMs = 2400; // loading length
+  const durationMs = 3200; // longer loading length
   const start = performance.now();
 
   function tick(now){
@@ -506,7 +531,7 @@
       // remove intro after the curtain ends
       setTimeout(() => {
         intro.style.display = "none";
-      }, 1800);
+      }, 3500);
     }
   }
   requestAnimationFrame(tick);
@@ -516,7 +541,7 @@
     curtain.innerHTML = "";
 
     const symbols = ["✨","✦","✧","⋆","💗","💖","•","·"];
-    const count = 180; // dense curtain
+    const count = 260; // denser curtain
 
     for(let i=0;i<count;i++){
       const el = document.createElement("div");
@@ -524,9 +549,9 @@
       el.textContent = symbols[Math.floor(Math.random()*symbols.length)];
       const x = Math.random()*100;
       const size = 10 + Math.random()*16;
-      const dur = 1.2 + Math.random()*0.9;
-      const delay = Math.random()*0.35;
-      const drift = (Math.random()*60 - 30).toFixed(1) + "px";
+      const dur = 2.0 + Math.random()*1.4; // slower fall
+      const delay = Math.random()*0.45;
+      const drift = (Math.random()*70 - 35).toFixed(1) + "px";
 
       el.style.left = x + "vw";
       el.style.fontSize = size + "px";
@@ -544,7 +569,7 @@
     setTimeout(() => {
       curtain.classList.remove("show");
       curtain.innerHTML = "";
-    }, 1900);
+    }, 3300);
   }
 })();
 
@@ -668,11 +693,11 @@
 
     startCandyRain();
 
-    // show final modal after a short beat (while rain continues)
+    // show final modal later so the animation is clearly visible
     setTimeout(() => {
       finalBackdrop.classList.add("show");
       finalBackdrop.setAttribute("aria-hidden","false");
-    }, 1150);
+    }, 2800);
   });
 
   // --- Candy SVG assets (inline via data-URI) ---
@@ -756,9 +781,9 @@
       { kind:"spark", src:null } // glitter sparkles
     ];
 
-    const total = 85;          // density
-    const baseDur = 3.6;       // slow / gentle
-    const durJitter = 2.2;
+    const total = 150;          // more elements
+    const baseDur = 6.2;        // slower
+    const durJitter = 3.6;      // more variation
 
     for(let i=0;i<total;i++){
       const t = types[Math.floor(Math.random()*types.length)];
@@ -772,8 +797,8 @@
 
       const x = Math.random()*100;
       const dur = baseDur + Math.random()*durJitter;
-      const delay = Math.random()*1.2; // a little stagger
-      const sway = (Math.random()*120 - 60).toFixed(1) + "px";
+      const delay = Math.random()*2.2; // more stagger
+      const sway = (Math.random()*140 - 70).toFixed(1) + "px";
 
       el.style.left = x + "vw";
       el.style.animationDuration = dur + "s";
@@ -800,11 +825,11 @@
       rainLayer.appendChild(el);
     }
 
-    // Stop rain after it finishes, but keep final modal on top
+    // End rain after longer duration
     setTimeout(() => {
       rainLayer.classList.remove("show");
       rainLayer.innerHTML = "";
-    }, 6200);
+    }, 12500);
   }
 })();
 </script>
