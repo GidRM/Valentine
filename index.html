@@ -5,14 +5,12 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>💗 Valentine</title>
 
-  <!-- Fonts: bubble titles + elegant serif body -->
   <style>
     @import url("https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Playfair+Display:wght@400;600&display=swap");
   </style>
 
   <style>
     :root{
-      /* Palette (Rose quartz / blush / red wine / oat milk) */
       --rose-quartz:#F9CBD6;
       --blush:#F2AFBC;
       --red-wine:#9E182B;
@@ -33,7 +31,6 @@
       font-family: "Playfair Display", ui-serif, Georgia, serif;
     }
 
-    /* subtle paper/noise texture + soft blur blobs */
     body::before{
       content:"";
       position:fixed; inset:0;
@@ -88,7 +85,7 @@
 
     .btnRow{
       position:relative;
-      height: 210px; /* space for bouncing NO */
+      height: 210px;
       display:flex;
       align-items:flex-end;
       justify-content:center;
@@ -132,7 +129,6 @@
       color: rgba(42,31,34,.85);
     }
 
-    /* NO button becomes absolutely positioned when it starts running */
     .btnNo.is-floating{
       position:absolute;
       left: 55%;
@@ -140,7 +136,7 @@
       transform: translate(-50%,-50%) scale(1);
       margin:0;
       z-index:3;
-      touch-action:none;
+      touch-action: manipulation;
     }
 
     .hint{
@@ -165,8 +161,6 @@
       place-items:center;
       padding: 24px 16px;
     }
-
-    /* Balloon (SVG) container */
     .balloonWrap{
       width:min(320px, 76vw);
       position:relative;
@@ -174,7 +168,6 @@
       transform: translateZ(0);
     }
 
-    /* Glitter curtain overlay */
     .curtain{
       position:fixed; inset:0;
       pointer-events:none;
@@ -198,7 +191,6 @@
       100%{ transform: translateY(120vh) translateX(var(--drift, 0px)) rotate(360deg); opacity:1;}
     }
 
-    /* Pop animation for balloon */
     .pop{
       animation: pop .28s ease forwards;
       transform-origin: 50% 55%;
@@ -283,6 +275,17 @@
       max-height: 82vh;
       overflow:auto;
     }
+
+    .finalGif{
+      display:block;
+      width:min(260px, 70vw);
+      height:auto;
+      margin: 4px auto 10px;
+      border-radius: 18px;
+      border: 1px solid rgba(158,24,43,.10);
+      box-shadow: 0 18px 46px rgba(158,24,43,.18);
+    }
+
     .final p{margin:0 0 10px; line-height:1.45;}
     .heartList{
       list-style:none;
@@ -313,7 +316,7 @@
     .rainLayer{
       position:fixed; inset:0;
       pointer-events:none;
-      z-index:85; /* above page, below final modal */
+      z-index:85;
       overflow:hidden;
       display:none;
     }
@@ -335,7 +338,6 @@
       100%{ transform: translateY(120vh) translateX(var(--sway, 0px)) rotate(520deg); opacity:1;}
     }
 
-    /* Respect reduced motion */
     @media (prefers-reduced-motion: reduce){
       .glitter, .candy, .pop{animation:none !important;}
       .intro{transition:none;}
@@ -348,7 +350,6 @@
   <div class="intro" id="intro">
     <div class="introInner">
       <div class="balloonWrap" id="balloonWrap" aria-label="Loading">
-        <!-- Heart balloon with clipped fill + I LOVE YOU text -->
         <svg viewBox="0 0 420 420" width="100%" height="auto" role="img" aria-label="Heart balloon">
           <defs>
             <path id="heartPath" d="M210 365
@@ -359,9 +360,7 @@
               C322 60 365 95 365 155
               C365 275 210 365 210 365 Z" />
 
-            <clipPath id="clipHeart">
-              <use href="#heartPath" />
-            </clipPath>
+            <clipPath id="clipHeart"><use href="#heartPath" /></clipPath>
 
             <radialGradient id="gloss" cx="28%" cy="26%" r="55%">
               <stop offset="0%" stop-color="white" stop-opacity=".85"/>
@@ -387,11 +386,9 @@
           </defs>
 
           <use href="#heartPath" fill="url(#balloonBase)" filter="url(#softShadow)"/>
-
           <g clip-path="url(#clipHeart)">
             <rect id="fillRect" x="0" y="0" width="0" height="420" fill="url(#fillGrad)"></rect>
           </g>
-
           <use href="#heartPath" fill="url(#gloss)" opacity=".95"/>
           <use href="#heartPath" fill="none" stroke="#9E182B" stroke-opacity=".18" stroke-width="6"/>
 
@@ -448,6 +445,14 @@
   <!-- Final modal (no exit) -->
   <div class="finalBackdrop" id="finalBackdrop" aria-hidden="true">
     <div class="final" role="dialog" aria-modal="true" aria-labelledby="finalTitle">
+      <!-- GIF ABOVE the title -->
+      <img
+        class="finalGif"
+        src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExcGI4OGlpbGR1bWd4amticHdvbXV1MGZvczRuazI1OTF3bXdsa3E0eiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/WK7omsLop0431tZjXb/giphy.gif"
+        alt="Cute gif"
+        loading="lazy"
+      />
+
       <div class="modalTitle" id="finalTitle">Congratulations. You’re Stuck With Me 💞</div>
 
       <p class="modalText" style="margin-top:6px;">
@@ -466,14 +471,14 @@
         <li>
           <span class="heartBullet" aria-hidden="true"></span>
           <span>
-            You receive unlimited emotional and delululuuuu support, memes, and hype.
+            You receive unlimited (reasonable) emotional and delululuuuu support, memes, and hype.
           </span>
         </li>
 
         <li>
           <span class="heartBullet" aria-hidden="true"></span>
           <span>
-            The best service any partner could ever offer you.
+            The best service any boyfriend could ever offer you.
           </span>
         </li>
 
@@ -500,8 +505,7 @@
     try{ navigator.vibrate?.(30); }catch(e){}
   });
 
-  // Longer loading to enjoy it
-  const durationMs = 3800;
+  const durationMs = 3800; // longer loading
   const start = performance.now();
 
   function tick(now){
@@ -512,12 +516,12 @@
     }else{
       balloonWrap.classList.add("pop");
       startGlitterCurtain();
+
       setTimeout(() => {
         app.removeAttribute("aria-hidden");
         intro.classList.add("fade");
       }, 120);
 
-      // remove intro after longer curtain
       setTimeout(() => {
         intro.style.display = "none";
       }, 4800);
@@ -530,7 +534,7 @@
     curtain.innerHTML = "";
 
     const symbols = ["✨","✦","✧","⋆","💗","💖","•","·"];
-    const count = 320; // more dense sipario
+    const count = 320;
 
     for(let i=0;i<count;i++){
       const el = document.createElement("div");
@@ -539,7 +543,7 @@
 
       const x = Math.random()*100;
       const size = 10 + Math.random()*18;
-      const dur = 2.6 + Math.random()*2.0; // longer fall
+      const dur = 2.6 + Math.random()*2.0;
       const delay = Math.random()*0.65;
       const drift = (Math.random()*90 - 45).toFixed(1) + "px";
 
@@ -561,7 +565,7 @@
   }
 })();
 
-/* ---------------- MAIN: NO button bounces + shrinks; YES triggers candy rain + final modal ---------------- */
+/* ---------------- MAIN: NO bounces + shrinks; YES triggers candy rain + final modal ---------------- */
 (function(){
   const btnRow = document.getElementById("btnRow");
   const yesBtn = document.getElementById("yesBtn");
@@ -577,6 +581,11 @@
   let noDisabled = false;
   let x = 0, y = 0, vx = 1.7, vy = 1.4;
   let scale = 1;
+
+  // Mobile “let them click sometimes” logic:
+  // 0.0 = always dodge (almost never clickable)
+  // 1.0 = never dodge (always clickable)
+  const ALLOW_CLICK_CHANCE_ON_TAP = 0.18; // ~18% chance a tap is allowed to become a click
 
   setTimeout(() => startNoFloating(), 500);
 
@@ -630,17 +639,29 @@
     vy *= (Math.random() < 0.5 ? 1.06 : -1.06);
 
     const rect = btnRow.getBoundingClientRect();
-    x = Math.max(10, Math.min(rect.width - 60, x + (Math.random()*140 - 70)));
-    y = Math.max(10, Math.min(rect.height - 60, y + (Math.random()*120 - 60)));
+    x = Math.max(10, Math.min(rect.width - 60, x + (Math.random()*160 - 80)));
+    y = Math.max(10, Math.min(rect.height - 60, y + (Math.random()*140 - 70)));
     applyNoTransform();
     try{ navigator.vibrate?.(10); }catch(e){}
   }
 
-  noBtn.addEventListener("mouseenter", dodge);
-  noBtn.addEventListener("pointerenter", dodge);
-  noBtn.addEventListener("touchstart", (e)=>{ if(!noDisabled){ e.preventDefault(); dodge(); }}, {passive:false});
-  noBtn.addEventListener("pointerdown", (e)=>{ if(!noDisabled){ e.preventDefault(); dodge(); }});
+  // Desktop hover = always dodge
+  noBtn.addEventListener("mouseenter", () => { if(!noDisabled) dodge(); });
+  noBtn.addEventListener("pointerenter", (e) => {
+    // On touch, pointerenter can be noisy; only treat as hover for non-touch pointers.
+    if(e.pointerType !== "touch" && !noDisabled) dodge();
+  });
 
+  // Mobile tap: MOSTLY dodge, SOMETIMES allow the click to happen
+  noBtn.addEventListener("touchstart", () => {
+    if(noDisabled) return;
+    // Delay a hair so the browser can still produce a "click" if we decide to allow it.
+    setTimeout(() => {
+      if(Math.random() > ALLOW_CLICK_CHANCE_ON_TAP) dodge();
+    }, 40);
+  }, {passive:true});
+
+  // If someone actually clicks NO: show popup, then disable NO clicks (only YES clickable)
   noBtn.addEventListener("click", (e)=>{
     e.preventDefault();
     if(noDisabled) return;
@@ -662,11 +683,12 @@
   }
   noModalOk.addEventListener("click", hideNoModal);
 
+  // YES click: NO disappears first, then candy rain, then final modal
   yesBtn.addEventListener("click", ()=>{
     yesBtn.disabled = true;
     yesBtn.style.filter = "saturate(1.05)";
 
-    // NO disappears BEFORE the YES animation (as requested)
+    // NO disappears BEFORE the YES animation
     noBtn.style.display = "none";
     noActive = false;
 
@@ -674,7 +696,7 @@
 
     startCandyRain();
 
-    // Delay final modal more so the animation is clearly visible
+    // Delay final modal so the candy rain is clearly visible
     setTimeout(() => {
       finalBackdrop.classList.add("show");
       finalBackdrop.setAttribute("aria-hidden","false");
@@ -762,7 +784,6 @@
       { kind:"spark", src:null }
     ];
 
-    // Longer + richer rain
     const total = 180;
     const baseDur = 7.2;
     const durJitter = 4.5;
@@ -806,7 +827,6 @@
       rainLayer.appendChild(el);
     }
 
-    // Keep it visible longer
     setTimeout(() => {
       rainLayer.classList.remove("show");
       rainLayer.innerHTML = "";
